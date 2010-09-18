@@ -19,20 +19,26 @@
 DEVICE=motus
 
 mkdir -p ../../../vendor/motorola/$DEVICE/proprietary
-unzip -j -o ../../../${DEVICE}_update.zip system/bin/akmd2 -d ../../../vendor/motorola/$DEVICE/proprietary
-chmod 755 ../../../vendor/motorola/$DEVICE/proprietary/akmd2
+unzip -j -o ../../../${DEVICE}_update.zip system/bin/akmd -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/bin/touchpad -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/bin/minipadut -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/bin/qmuxd -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/bin/tcmd_engine -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/bin/fuel_gauge -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/bin/port_bridge -d ../../../vendor/motorola/$DEVICE/proprietary
-unzip -j -o ../../../${DEVICE}_update.zip system/bin/mknod -d ../../../vendor/motorola/$DEVICE/proprietary
+unzip -j -o ../../../${DEVICE}_update.zip system/etc/akm/akmd_set.cfg -d ../../../vendor/motorola/$DEVICE/proprietary
+unzip -j -o ../../../${DEVICE}_update.zip system/etc/touchpad/50/saveconfig.cfg -d ../../../vendor/motorola/$DEVICE/proprietary
+unzip -j -o ../../../${DEVICE}_update.zip system/etc/touchpad/50/touchpad.cfg -d ../../../vendor/motorola/$DEVICE/proprietary
+unzip -j -o ../../../${DEVICE}_update.zip system/etc/touchpad/50/touchpad.enc -d ../../../vendor/motorola/$DEVICE/proprietary
+unzip -j -o ../../../${DEVICE}_update.zip system/etc/minipad/104/minipad.cfg -d ../../../vendor/motorola/$DEVICE/proprietary
+unzip -j -o ../../../${DEVICE}_update.zip system/etc/minipad/104/minipad.enc -d ../../../vendor/motorola/$DEVICE/proprietary
+unzip -j -o ../../../${DEVICE}_update.zip system/etc/minipad/104/saveconfig.cfg -d ../../../vendor/motorola/$DEVICE/proprietary/minisaveconfig.cfg
 unzip -j -o ../../../${DEVICE}_update.zip system/etc/AudioFilter.csv -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/etc/AudioPara4.csv -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/etc/BCM4325D1_004.002.004.0218.0225f.hcd -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/etc/wifi/sdio-g-cdc-reclaim-wme.bin -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/libaudioeq.so -d ../../../vendor/motorola/$DEVICE/proprietary
+unzip -j -o ../../../${DEVICE}_update.zip system/lib/egl/libGLES_qcom.so -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/libril-qc-1.so -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/libqmi.so -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/libnv.so -d ../../../vendor/motorola/$DEVICE/proprietary
@@ -72,19 +78,26 @@ unzip -j -o ../../../${DEVICE}_update.zip system/lib/libmm-omxcore.so -d ../../.
 
 # All the blobs necessary for motus
 PRODUCT_COPY_FILES += \\
-    vendor/motorola/__DEVICE__/proprietary/akmd2:system/bin/akmd2 \\
+    vendor/motorola/__DEVICE__/proprietary/akmd:system/bin/akmd \\
     vendor/motorola/__DEVICE__/proprietary/touchpad:system/bin/touchpad \\
     vendor/motorola/__DEVICE__/proprietary/minipadut:system/bin/minipadut \\
     vendor/motorola/__DEVICE__/proprietary/qmuxd:system/bin/qmuxd \\
     vendor/motorola/__DEVICE__/proprietary/fuel_gauge:system/bin/fuel_gauge \\
-    vendor/motorola/__DEVICE__/proprietary/mknod:system/bin/mknod \\
     vendor/motorola/__DEVICE__/proprietary/port_bridge:system/bin/port_bridge \\
     vendor/motorola/__DEVICE__/proprietary/tcmd_engine:system/bin/tcmd_engine \\
+    vendor/motorola/__DEVICE__/proprietary/akmd_set.cfg:system/etc/akm/akmd_set.cfg \\
+    vendor/motorola/__DEVICE__/proprietary/touchpad.enc:system/etc/touchpad/50/touchpad.enc \\
+    vendor/motorola/__DEVICE__/proprietary/touchpad.cfg:system/etc/touchpad/50/touchpad.cfg \\
+    vendor/motorola/__DEVICE__/proprietary/saveconfig.cfg:system/etc/touchpad/50/saveconfig.cfg \\
+    vendor/motorola/__DEVICE__/proprietary/minipad.cfg:system/etc/minipad/104/minipad.cfg \\
+    vendor/motorola/__DEVICE__/proprietary/minipad.enc:system/etc/minipad/104/minipad.enc \\
+    vendor/motorola/__DEVICE__/proprietary/minisaveconfig.cfg:system/etc/minipad/104/saveconfig.cfg \\
     vendor/motorola/__DEVICE__/proprietary/AudioFilter.csv:system/etc/AudioFilter.csv \\
     vendor/motorola/__DEVICE__/proprietary/AudioPara4.csv:system/etc/AudioPara4.csv \\
-    vendor/motorola/__DEVICE__/proprietary/BCM4325D1_004.002.004.0218.0225f.hcd:system/etc/BCM4325D1_004.002.004.0218.0225f.hcd \\
-    vendor/motorola/__DEVICE__/proprietary/sdio-g-cdc-reclaim-wme.bin:system/etc/wifi/sdio-g-cdc-reclaim-wme.bin \\
+    vendor/motorola/__DEVICE__/proprietary/BCM4325D1_004.002.004.0218.0225f.hcd:system/etc/firmware/bcm4325.hcd \\
+    vendor/motorola/__DEVICE__/proprietary/sdio-g-cdc-reclaim-wme.bin:system/etc/firmware/sdio-g-cdc-reclaim-wme.bin \\
     vendor/motorola/__DEVICE__/proprietary/libaudioeq.so:system/lib/libaudioeq.so \\
+    vendor/motorola/__DEVICE__/proprietary/egl/libGLES_qcom.so:system/lib/egl/libGLES_qcom.so \\
     vendor/motorola/__DEVICE__/proprietary/libril-qc-1.so:system/lib/libril-qc-1.so \\
     vendor/motorola/__DEVICE__/proprietary/libwmsts.so:system/lib/libwmsts.so \\
     vendor/motorola/__DEVICE__/proprietary/libqmi.so:system/lib/libqmi.so \\
@@ -98,7 +111,7 @@ PRODUCT_COPY_FILES += \\
     vendor/motorola/__DEVICE__/proprietary/libwms.so:system/lib/libwms.so \\
     vendor/motorola/__DEVICE__/proprietary/liboncrpc.so:system/lib/liboncrpc.so \\
     vendor/motorola/__DEVICE__/proprietary/libmm-adspsvc.so:system/lib/libmm-adspsvc.so \\
-    vendor/motorola/__DEVICE__/proprietary/libmmcamera.so:system/lib/libmmcamera.so \\
+    vendor/motorola/__DEVICE__/proprietary/libmmcamera.so:system/lib/liboemcamera.so \\
     vendor/motorola/__DEVICE__/proprietary/libOmxH264Dec.so:system/lib/libOmxH264Dec.so \\
     vendor/motorola/__DEVICE__/proprietary/libOmxMpeg4Dec.so:system/lib/libOmxMpeg4Dec.so \\
     vendor/motorola/__DEVICE__/proprietary/libOmxVidEnc.so:system/lib/libOmxVidEnc.so \\

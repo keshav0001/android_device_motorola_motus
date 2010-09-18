@@ -34,9 +34,9 @@ TARGET_NO_BOOTLOADER := true
 # Wifi related defines
 BOARD_WPA_SUPPLICANT_DRIVER := WEXT
 WPA_SUPPLICANT_VERSION      := VER_0_6_X
-BOARD_WLAN_DEVICE           := bcm4329
+BOARD_WLAN_DEVICE           := bcm4325
 WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/dhd.ko"
-#WIFI_DRIVER_MODULE_ARG      := "firmware_path=/system/etc/firmware/fw_bcm4329.bin nvram_path=/proc/calibration"
+WIFI_DRIVER_MODULE_ARG      := "firmware_path=/system/etc/firmware/sdio-g-cdc-reclaim-wme.bin nvram_path=/proc/calibration"
 WIFI_DRIVER_MODULE_NAME     := "bcm4329"
 
 TARGET_BOOTLOADER_LIBS := \
@@ -51,7 +51,9 @@ BOARD_KERNEL_CMDLINE := no_console_suspend=1 console=null quiet
 
 BOARD_HAVE_BLUETOOTH := true
 
-BOARD_VENDOR_USE_AKMD := akm8976
+BOARD_USES_GENERIC_AUDIO := true
+
+BOARD_VENDOR_USE_AKMD := akm8973
 
 BOARD_VENDOR_QCOM_AMSS_VERSION := 6220
 
@@ -59,7 +61,7 @@ BOARD_VENDOR_QCOM_AMSS_VERSION := 6220
 BOARD_FLASH_BLOCK_SIZE := 131072
 
 # OpenGL drivers config file path
-#BOARD_EGL_CFG := device/motorola/motus/egl.cfg
+BOARD_EGL_CFG := device/motorola/motus/egl.cfg
 
 # Use libcamera2
 BOARD_USES_OLD_CAMERA_HACK := true

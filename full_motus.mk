@@ -90,7 +90,6 @@ PRODUCT_COPY_FILES += \
     device/motorola/motus/apns-conf.xml:system/etc/apns-conf.xml
 
 PRODUCT_COPY_FILES += \
-    device/motorola/motus/modules/2.6.27-kernelzilla/kernel/drivers/net/wireless/bcm4329/bcm4329.ko:system/lib/modules/bcm4329.ko \
     device/motorola/motus/modules/2.6.27-kernelzilla/modules.seriomap:system/lib/modules/2.6.27-kernelzilla/modules.seriomap \
     device/motorola/motus/modules/2.6.27-kernelzilla/modules.alias:system/lib/modules/2.6.27-kernelzilla/modules.alias \
     device/motorola/motus/modules/2.6.27-kernelzilla/kernel/drivers/net/wireless/bcm4329/bcm4329.ko:system/lib/modules/2.6.27-kernelzilla/kernel/drivers/net/wireless/bcm4329/bcm4329.ko \

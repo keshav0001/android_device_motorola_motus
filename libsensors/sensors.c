@@ -25,7 +25,7 @@
 #include <pthread.h>
 
 #include <linux/input.h>
-#include <linux/akm8976.h>
+#include <linux/akm8973.h>
 
 #include <cutils/atomic.h>
 #include <cutils/log.h>
@@ -67,22 +67,22 @@ struct sensors_data_context_t {
  */
 
 static const struct sensor_t sSensorList[] = {
-        { "AK8976A 3-axis Accelerometer",
-                "Asahi Kasei",
+        { "AK8973 3-axis Accelerometer",
+                "The Android Open Source Project",
                 1, SENSORS_HANDLE_BASE+ID_A,
-                SENSOR_TYPE_ACCELEROMETER, 2.8f*9.81f, 9.81f/45.0f, 3.0f, { } },
-        { "AK8976A 3-axis Magnetic field sensor",
-                "Asahi Kasei",
+                SENSOR_TYPE_ACCELEROMETER, 2.8f, 1.0f/4032.0f, 3.0f, { } },
+        { "AK8973 3-axis Magnetic field sensor",
+                "The Android Open Source Project",
                 1, SENSORS_HANDLE_BASE+ID_M,
                 SENSOR_TYPE_MAGNETIC_FIELD, 2000.0f, 1.0f, 6.7f, { } },
-        { "AK8976A Orientation sensor",
-                "Asahi Kasei",
+        { "AK8973 Orientation sensor",
+                "The Android Open Source Project",
                 1, SENSORS_HANDLE_BASE+ID_O,
                 SENSOR_TYPE_ORIENTATION, 360.0f, 1.0f, 9.7f, { } },
-        { "AK8976A Temperature sensor",
-                "Asahi Kasei",
+        { "AK8973 Temperature sensor",
+                "The Android Open Source Project",
                 1, SENSORS_HANDLE_BASE+ID_T,
-                SENSOR_TYPE_TEMPERATURE, 115.0f, 1.6f, 3.0f, { } },
+                SENSOR_TYPE_TEMPERATURE, 80.0f, 1.0f, 0.0f, { } },
 };
 
 static int open_sensors(const struct hw_module_t* module, const char* name,
@@ -105,7 +105,7 @@ struct sensors_module_t HAL_MODULE_INFO_SYM = {
         .version_major = 1,
         .version_minor = 0,
         .id = SENSORS_HARDWARE_MODULE_ID,
-        .name = "AK8976A SENSORS Module",
+        .name = "AK8973 SENSORS Module",
         .author = "The Android Open Source Project",
         .methods = &sensors_module_methods,
     },
@@ -114,7 +114,7 @@ struct sensors_module_t HAL_MODULE_INFO_SYM = {
 
 /*****************************************************************************/
 
-#define AKM_DEVICE_NAME     "/dev/akm8976_aot"
+#define AKM_DEVICE_NAME     "/dev/akm8973_aot"
 
 
 // sensor IDs must be a power of two and
