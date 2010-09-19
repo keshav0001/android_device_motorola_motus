@@ -55,6 +55,7 @@ adb pull /system/lib/libOmxCore.so ../../../vendor/motorola/$DEVICE/proprietary/
 adb pull /system/lib/libOmxH264Dec.so ../../../vendor/motorola/$DEVICE/proprietary/
 adb pull /system/lib/libOmxMpeg4Dec.so ../../../vendor/motorola/$DEVICE/proprietary/
 adb pull /system/lib/libOmxVidEnc.so ../../../vendor/motorola/$DEVICE/proprietary/
+adb pull /system/lib/libmm-omxcore.so ../../../vendor/motorola/$DEVICE/proprietary/
 
 (cat << EOF) | sed s/__DEVICE__/$DEVICE/g > ../../../vendor/motorola/$DEVICE/$DEVICE-vendor-blobs.mk
 # Copyright (C) 2010 The Android Open Source Project
