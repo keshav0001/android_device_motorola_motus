@@ -49,6 +49,7 @@ adb pull /system/lib/libgsdi_exp.so ../../../vendor/motorola/$DEVICE/proprietary
 adb pull /system/lib/libgstk_exp.so ../../../vendor/motorola/$DEVICE/proprietary/
 adb pull /system/lib/libwms.so ../../../vendor/motorola/$DEVICE/proprietary/
 adb pull /system/lib/libmm-adspsvc.so ../../../vendor/motorola/$DEVICE/proprietary/
+adb pull /system/lib/libmmgsdilib.so ../../../vendor/motorola/$DEVICE/proprietary/
 adb pull /system/lib/liboncrpc.so ../../../vendor/motorola/$DEVICE/proprietary/
 adb pull /system/lib/libmmcamera.so ../../../vendor/motorola/$DEVICE/proprietary/
 adb pull /system/lib/libOmxCore.so ../../../vendor/motorola/$DEVICE/proprietary/
@@ -56,6 +57,10 @@ adb pull /system/lib/libOmxH264Dec.so ../../../vendor/motorola/$DEVICE/proprieta
 adb pull /system/lib/libOmxMpeg4Dec.so ../../../vendor/motorola/$DEVICE/proprietary/
 adb pull /system/lib/libOmxVidEnc.so ../../../vendor/motorola/$DEVICE/proprietary/
 adb pull /system/lib/libmm-omxcore.so ../../../vendor/motorola/$DEVICE/proprietary/
+adb pull /system/usr/keychars/adp5588_motus.kcm.bin ../../../vendor/motorola/$DEVICE/proprietary/
+adb pull /system/usr/keychars/adp5588_motus_P1.kcm.bin ../../../vendor/motorola/$DEVICE/proprietary/
+adb pull /system/usr/keychars/adp5588_motus_P2.kcm.bin ../../../vendor/motorola/$DEVICE/proprietary/
+adb pull /system/usr/keychars/adp5588_motus_P3.kcm.bin ../../../vendor/motorola/$DEVICE/proprietary/
 
 (cat << EOF) | sed s/__DEVICE__/$DEVICE/g > ../../../vendor/motorola/$DEVICE/$DEVICE-vendor-blobs.mk
 # Copyright (C) 2010 The Android Open Source Project
@@ -76,7 +81,7 @@ adb pull /system/lib/libmm-omxcore.so ../../../vendor/motorola/$DEVICE/proprieta
 
 # All the blobs necessary for motus
 PRODUCT_COPY_FILES += \\
-    vendor/motorola/__DEVICE__/proprietary/akmd2:system/bin/akmd2 \\
+    vendor/motorola/__DEVICE__/proprietary/akmd:system/bin/akmd \\
     vendor/motorola/__DEVICE__/proprietary/touchpad:system/bin/touchpad \\
     vendor/motorola/__DEVICE__/proprietary/minipadut:system/bin/minipadut \\
     vendor/motorola/__DEVICE__/proprietary/qmuxd:system/bin/qmuxd \\
@@ -105,7 +110,7 @@ PRODUCT_COPY_FILES += \\
     vendor/motorola/__DEVICE__/proprietary/libdss.so:system/lib/libdss.so \\
     vendor/motorola/__DEVICE__/proprietary/libmmgsdilib.so:system/lib/libmmgsdilib.so \\
     vendor/motorola/__DEVICE__/proprietary/libgsdi_exp.so:system/lib/libgsdi_exp.so \\
-    vendor/motorola/__DEVICE__/proprietary/libdgstk_exp.so:system/lib/libgstk_exp.so \\
+    vendor/motorola/__DEVICE__/proprietary/libgstk_exp.so:system/lib/libgstk_exp.so \\
     vendor/motorola/__DEVICE__/proprietary/libwms.so:system/lib/libwms.so \\
     vendor/motorola/__DEVICE__/proprietary/liboncrpc.so:system/lib/liboncrpc.so \\
     vendor/motorola/__DEVICE__/proprietary/libmm-adspsvc.so:system/lib/libmm-adspsvc.so \\
@@ -114,7 +119,11 @@ PRODUCT_COPY_FILES += \\
     vendor/motorola/__DEVICE__/proprietary/libOmxMpeg4Dec.so:system/lib/libOmxMpeg4Dec.so \\
     vendor/motorola/__DEVICE__/proprietary/libOmxVidEnc.so:system/lib/libOmxVidEnc.so \\
     vendor/motorola/__DEVICE__/proprietary/libOmxCore.so:system/lib/libOmxCore.so \\
-    vendor/motorola/__DEVICE__/proprietary/libmm-omxcore.so:system/lib/libmm-omxcore.so
+    vendor/motorola/__DEVICE__/proprietary/libmm-omxcore.so:system/lib/libmm-omxcore.so \\
+    vendor/motorola/__DEVICE__/proprietary/adp5588_motus.kcm.bin:system/usr/keychars/adp5588_motus.kcm.bin \\
+    vendor/motorola/__DEVICE__/proprietary/adp5588_motus_P1.kcm.bin:system/usr/keychars/adp5588_motus_P1.kcm.bin \\
+    vendor/motorola/__DEVICE__/proprietary/adp5588_motus_P2.kcm.bin:system/usr/keychars/adp5588_motus_P2.kcm.bin \\
+    vendor/motorola/__DEVICE__/proprietary/adp5588_motus_P3.kcm.bin:system/usr/keychars/adp5588_motus_P3.kcm.bin
 EOF
 
 ./setup-makefiles.sh

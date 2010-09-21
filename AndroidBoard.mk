@@ -25,6 +25,10 @@ ALL_PREBUILT += $(file)
 $(file) : $(LOCAL_PATH)/init.motus.rc | $(ACP)
 	$(transform-prebuilt-to-target)
 
+include $(CLEAR_VARS)
+LOCAL_SRC_FILES := motus-kpd.kcm
+include $(BUILD_KEY_CHAR_MAP)
+
 file := $(TARGET_OUT_KEYLAYOUT)/adp5588_motus.kl
 ALL_PREBUILT += $(file)
 $(file) : $(LOCAL_PATH)/adp5588_motus.kl | $(ACP)

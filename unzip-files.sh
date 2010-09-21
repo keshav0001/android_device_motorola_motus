@@ -57,6 +57,10 @@ unzip -j -o ../../../${DEVICE}_update.zip system/lib/libOmxMpeg4Dec.so -d ../../
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/libOmxVidEnc.so -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/libOmxCore.so -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/libmm-omxcore.so -d ../../../vendor/motorola/$DEVICE/proprietary
+unzip -j -o ../../../${DEVICE}_update.zip system/usr/keychars/adp5588_motus.kcm.bin -d ../../../vendor/motorola/$DEVICE/proprietary
+unzip -j -o ../../../${DEVICE}_update.zip system/usr/keychars/adp5588_motus_P1.kcm.bin -d ../../../vendor/motorola/$DEVICE/proprietary
+unzip -j -o ../../../${DEVICE}_update.zip system/usr/keychars/adp5588_motus_P2.kcm.bin -d ../../../vendor/motorola/$DEVICE/proprietary
+unzip -j -o ../../../${DEVICE}_update.zip system/usr/keychars/adp5588_motus_P3.kcm.bin -d ../../../vendor/motorola/$DEVICE/proprietary
 
 (cat << EOF) | sed s/__DEVICE__/$DEVICE/g > ../../../vendor/motorola/$DEVICE/$DEVICE-vendor-blobs.mk
 # Copyright (C) 2010 The Android Open Source Project
@@ -116,7 +120,11 @@ PRODUCT_COPY_FILES += \\
     vendor/motorola/__DEVICE__/proprietary/libOmxMpeg4Dec.so:system/lib/libOmxMpeg4Dec.so \\
     vendor/motorola/__DEVICE__/proprietary/libOmxVidEnc.so:system/lib/libOmxVidEnc.so \\
     vendor/motorola/__DEVICE__/proprietary/libOmxCore.so:system/lib/libOmxCore.so \\
-    vendor/motorola/__DEVICE__/proprietary/libmm-omxcore.so:system/lib/libmm-omxcore.so
+    vendor/motorola/__DEVICE__/proprietary/libmm-omxcore.so:system/lib/libmm-omxcore.so \\
+    vendor/motorola/__DEVICE__/proprietary/adp5588_motus.kcm.bin:system/usr/keychars/adp5588_motus.kcm.bin \\
+    vendor/motorola/__DEVICE__/proprietary/adp5588_motus_P1.kcm.bin:system/usr/keychars/adp5588_motus_P1.kcm.bin \\
+    vendor/motorola/__DEVICE__/proprietary/adp5588_motus_P2.kcm.bin:system/usr/keychars/adp5588_motus_P2.kcm.bin \\
+    vendor/motorola/__DEVICE__/proprietary/adp5588_motus_P3.kcm.bin:system/usr/keychars/adp5588_motus_P3.kcm.bin
 EOF
 
 ./setup-makefiles.sh
