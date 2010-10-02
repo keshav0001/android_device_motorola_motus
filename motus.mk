@@ -22,7 +22,10 @@ DEVICE_PACKAGE_OVERLAYS := device/motorola/motus/overlay
 
 PRODUCT_PACKAGES += \
     VoiceDialer \
-    sensors.msm7k
+    sensors.motus \
+    leds.motus \
+    librs_jni \
+    lights.motus
 
 # Install the features available on this device.
 PRODUCT_COPY_FILES += \
@@ -31,6 +34,8 @@ PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
     frameworks/base/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
     frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
+    frameworks/base/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
+    frameworks/base/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
     frameworks/base/data/etc/android.hardware.touchscreen.multitouch.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.xml
 
 PRODUCT_PROPERTY_OVERRIDES := \
@@ -39,8 +44,10 @@ PRODUCT_PROPERTY_OVERRIDES := \
     ro.media.dec.jpeg.memcap=10000000
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    rild.libpath=/system/lib/libhtc_ril.so \
-    wifi.interface=eth0
+    rild.libpath=/system/lib/libril-qc-1.so \
+    rild.libargs=-d /dev/smd0 \
+    wifi.interface=eth0 \
+    wifi.supplicant_scan_interval=15
 
 # Time between scans in seconds. Keep it high to minimize battery drain.
 # This only affects the case in which there are remembered access points,
@@ -61,6 +68,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Disable JIT by default
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.execution-mode=int:fast
+
+# enable insecure AGPS
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.ril.def.agps.mode=2
 
 # The OpenGL ES API level that is natively supported by this device.
 # This is a 16.16 fixed point number
@@ -92,17 +103,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/motorola/motus/modules/2.6.27-kernelzilla/modules.seriomap:system/lib/modules/2.6.27-kernelzilla/modules.seriomap \
     device/motorola/motus/modules/2.6.27-kernelzilla/modules.alias:system/lib/modules/2.6.27-kernelzilla/modules.alias \
-    device/motorola/motus/modules/2.6.27-kernelzilla/kernel/drivers/net/wireless/bcm4329/bcm4329.ko:system/lib/modules/2.6.27-kernelzilla/kernel/drivers/net/wireless/bcm4329/bcm4329.ko \
     device/motorola/motus/modules/2.6.27-kernelzilla/kernel/net/sunrpc/auth_gss/rpcsec_gss_krb5.ko:system/lib/modules/2.6.27-kernelzilla/kernel/net/sunrpc/auth_gss/rpcsec_gss_krb5.ko \
     device/motorola/motus/modules/2.6.27-kernelzilla/kernel/net/sunrpc/auth_gss/auth_rpcgss.ko:system/lib/modules/2.6.27-kernelzilla/kernel/net/sunrpc/auth_gss/auth_rpcgss.ko \
-    device/motorola/motus/modules/2.6.27-kernelzilla/kernel/net/ipv6/xfrm6_mode_beet.ko:system/lib/modules/2.6.27-kernelzilla/kernel/net/ipv6/xfrm6_mode_beet.ko \
-    device/motorola/motus/modules/2.6.27-kernelzilla/kernel/net/ipv6/ipcomp6.ko:system/lib/modules/2.6.27-kernelzilla/kernel/net/ipv6/ipcomp6.ko \
-    device/motorola/motus/modules/2.6.27-kernelzilla/kernel/net/ipv6/xfrm6_mode_tunnel.ko:system/lib/modules/2.6.27-kernelzilla/kernel/net/ipv6/xfrm6_mode_tunnel.ko \
-    device/motorola/motus/modules/2.6.27-kernelzilla/kernel/net/ipv6/xfrm6_tunnel.ko:system/lib/modules/2.6.27-kernelzilla/kernel/net/ipv6/xfrm6_tunnel.ko \
-    device/motorola/motus/modules/2.6.27-kernelzilla/kernel/net/ipv6/sit.ko:system/lib/modules/2.6.27-kernelzilla/kernel/net/ipv6/sit.ko \
-    device/motorola/motus/modules/2.6.27-kernelzilla/kernel/net/ipv6/xfrm6_mode_transport.ko:system/lib/modules/2.6.27-kernelzilla/kernel/net/ipv6/xfrm6_mode_transport.ko \
-    device/motorola/motus/modules/2.6.27-kernelzilla/kernel/net/ipv6/tunnel6.ko:system/lib/modules/2.6.27-kernelzilla/kernel/net/ipv6/tunnel6.ko \
-    device/motorola/motus/modules/2.6.27-kernelzilla/kernel/net/ipv6/ipv6.ko:system/lib/modules/2.6.27-kernelzilla/kernel/net/ipv6/ipv6.ko \
     device/motorola/motus/modules/2.6.27-kernelzilla/kernel/fs/fuse/fuse.ko:system/lib/modules/2.6.27-kernelzilla/kernel/fs/fuse/fuse.ko \
     device/motorola/motus/modules/2.6.27-kernelzilla/kernel/fs/cifs/cifs.ko:system/lib/modules/2.6.27-kernelzilla/kernel/fs/cifs/cifs.ko \
     device/motorola/motus/modules/2.6.27-kernelzilla/modules.order:system/lib/modules/2.6.27-kernelzilla/modules.order \
@@ -123,7 +125,9 @@ $(call inherit-product-if-exists, vendor/motorola/motus/motus-vendor.mk)
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/generic.mk)
 
+PRODUCT_LOCALES += mdpi
+
 # Discard inherited values and use our own instead.
-PRODUCT_NAME := full_motus
+PRODUCT_NAME := generic_motus
 PRODUCT_DEVICE := motus
-PRODUCT_MODEL := Full Android on Motus
+PRODUCT_MODEL := Android on Motus

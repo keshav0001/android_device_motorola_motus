@@ -36,8 +36,8 @@ on boot
     setkey 0xc0 0x8b 0x707
     setkey 0xc0 0x6b 0x20c
 
-    mkdir /data/misc/wifi 0770 wifi wifi
-    mkdir /data/misc/wifi/sockets 0770 wifi wifi
+    mkdir /data/misc/wifi 0770 system wifi
+    mkdir /data/misc/wifi/sockets 0770 system wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     chown dhcp dhcp /data/misc/dhcp
 
@@ -46,10 +46,10 @@ on boot
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
     chmod 0660                /sys/class/rfkill/rfkill0/state
     # old kernel method:
-    chown bluetooth bluetooth /sys/module/board_motus/parameters/bluetooth_power_on
+    chown bluetooth net_bt_admin /sys/module/board_motus/parameters/bluetooth_power_on
     chmod 0660 /sys/module/board_motus/parameters/bluetooth_power_on
-    chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
-    chown bluetooth bluetooth /proc/bluetooth/sleep/proto
+    chown bluetooth net_bt_admin /sys/module/bluetooth_power/parameters/power
+    chown bluetooth net_bt_admin /proc/bluetooth/sleep/proto
     chown system system /sys/module/sco/parameters/disable_esco
     chmod 0660 /sys/module/bluetooth_power/parameters/power
     chmod 0660 /proc/bluetooth/sleep/proto
@@ -68,7 +68,7 @@ on boot
     chown radio system /sys/power/state
     chown radio system /sys/power/wake_lock
     chown radio system /sys/power/wake_unlock
-    chmod 0660 /sys/power/state
+    chmod 0664 /sys/power/state
     chmod 0660 /sys/power/wake_lock
     chmod 0660 /sys/power/wake_unlock
     chown system system /sys/class/timed_output/vibrator/enable
@@ -105,8 +105,7 @@ on boot
 
 # Broadcom stuff
     mkdir /data/misc/wifi 0770 system wifi
-    mkdir /data/misc/dhcp 0770 dhcp dhcp
-    chown dhcp dhcp /data/misc/dhcp
+    mkdir /data/misc/dhcp 0770 system wifi
     chown bluetooth bluetooth /sys/module/board_motus/parameters/bluetooth_power_on
     chmod 0660 /sys/module/board_motus/parameters/bluetooth_power_on
 
@@ -116,21 +115,23 @@ on boot
     mkdir /data/local/12m/batch/log 0775 system system
 
 #  E-compass
-    chown system system /dev/akm8973_aot
-    chown system system /dev/akm8973_dev
+    chown compass system /dev/akm8973_aot
+    chmod 0664 /dev/akm8973_aot
+    chown compass system /dev/akm8973_dev
+    chmod 0664 /dev/akm8973_dev
 
 # Accelerometer
-    chown system system /sys/class/i2c-adapter/i2c-0/0-0018/mode
+    chown compass system /sys/class/i2c-adapter/i2c-0/0-0018/mode
     chmod 0664 /sys/class/i2c-adapter/i2c-0/0-0018/mode
-    chown system system /dev/accelerometer
+    chown compass system /dev/accelerometer
     chmod 0664 /dev/accelerometer
 
 # touchscreen
-    chown system system /dev/touchpad
+    chown system input /dev/touchpad
     chmod 0666 /dev/touchpad
 
 # minipad
-    chown system system /dev/minipad
+    chown system input /dev/minipad
     chmod 0666 /dev/minipad
 
 # Camera LED brightness attributes accessible to all
@@ -138,13 +139,13 @@ on boot
     chmod 0666 /sys/class/leds/cam-torch/brightness
 
 # Old fast dormancy settings (needed for CDMA)
-     setprop ro.ril.fast.dormancy.rule 1
-     setprop ro.ril.fast.dormancy.timeout 2
+#     setprop ro.ril.fast.dormancy.rule 1
+#     setprop ro.ril.fast.dormancy.timeout 2
 
 # Fast dormancy settings
-     setprop ro.ril.fd.scron.timeout 3
-     setprop ro.ril.fd.scroff.timeout 4
-
+#     setprop ro.ril.fd.scron.timeout 3
+#     setprop ro.ril.fd.scroff.timeout 4
+      setprop ro.secure 1
 # Wakelock debug
      write /sys/module/wakelock/parameters/debug_mask 7
 
@@ -154,8 +155,8 @@ on boot
     chown system system /dev/misc_helper
     chmod 0660 /dev/misc_helper
     chown system graphics /dev/graphics/fb0
-    chmod 0660 /dev/graphics/fb0
-#    chmod 0644 /dev/block/mmcblk0p1
+    chmod 0666 /dev/graphics/fb0
+    chmod 0644 /dev/block/mmcblk0p1
 
 # Permissions needed for port_bridge
     chown root system /dev/ttyHSUSB0
@@ -168,7 +169,7 @@ on boot
     chmod 0664 /dev/als
     chown system system /sys/class/timed_output/vibrator/enable
     chown system system /sys/module/sco/parameters/disable_esco
-    chown system system /sys/kernel/ipv4/tcp_wmem_min
+    ichown system system /sys/kernel/ipv4/tcp_wmem_min
     chown system system /sys/kernel/ipv4/tcp_wmem_def
     chown system system /sys/kernel/ipv4/tcp_wmem_max
     chown system system /sys/kernel/ipv4/tcp_rmem_min
@@ -205,13 +206,8 @@ service fuel_gauge /system/bin/fuel_gauge --all
 service qmuxd /system/bin/qmuxd
     oneshot
 
-service wlan_loader /system/bin/wlan_loader \
-    -f /system/etc/firmware/sdio-g-cdc-reclaim-wme.bin -e /proc/calibration
-    disabled
-    oneshot
-
 service wpa_supplicant /system/bin/wpa_supplicant \
-    -Dwext -ieth0 -c/system/etc/wifi/wpa_supplicant.conf -q
+    -Dwext -ieth0 -c/data/misc/wifi/wpa_supplicant.conf
 #   we will start as root and wpa_supplicant will switch to user wifi
 #   after setting up the capabilities required for WEXT
 #   user wifi
@@ -248,4 +244,6 @@ service modemlog /system/bin/modemlog
     oneshot
 
 service minipadut /system/bin/minipadut -a
-    oneshot
+   user system 
+   group input misc
+   oneshot

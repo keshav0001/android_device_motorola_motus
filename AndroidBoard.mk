@@ -90,5 +90,9 @@ ALL_PREBUILT += $(file)
 $(file) : $(LOCAL_PATH)/build.motus.prop | $(ACP)
 	$(transform-prebuilt-to-target)
 
+# Least specific includes go first, so that they can get
+# overridden further down
+include $(CLEAR_VARS)
+
 -include vendor/motorola/motus/AndroidBoardVendor.mk
 

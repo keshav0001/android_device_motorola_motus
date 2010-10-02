@@ -20,7 +20,6 @@
 # WARNING: This line must come *before* including the proprietary
 # variant, so that it gets overwritten by the parent (which goes
 # against the traditional rules of inheritance).
-# USE_CAMERA_STUB := true
 
 # inherit from the proprietary version
 -include vendor/motorola/motus/BoardConfigVendor.mk
@@ -33,12 +32,16 @@ TARGET_NO_BOOTLOADER := true
 
 
 # Wifi related defines
-BOARD_WPA_SUPPLICANT_DRIVER := WEXT
+BOARD_WPA_SUPPLICANT_DRIVER := wpa_supplicant
 WPA_SUPPLICANT_VERSION      := VER_0_6_X
-BOARD_WLAN_DEVICE           := bcm4325
+BOARD_WLAN_DEVICE           := dhd
 WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/dhd.ko"
-WIFI_DRIVER_MODULE_ARG      := "firmware_path=/system/etc/firmware/sdio-g-cdc-reclaim-wme.bin nvram_path=/proc/calibration"
-WIFI_DRIVER_MODULE_NAME     := "bcm4329"
+WIFI_DRIVER_FW_STA_PATH     := "/system/etc/firmware/fw_bcm4325.bin"
+WIFI_DRIVER_FW_AP_PATH      := "/system/etc/firmware/fw_bcm4325_apsta.bin"
+WIFI_DRIVER_MODULE_ARG      := "firmware_path=/system/etc/firmware/fw_bcm4325.bin nvram_path=/system/etc/firmware/nvram.txt"
+WIFI_DRIVER_MODULE_NAME     := "dhd"
+
+BOARD_USES_GENERIC_AUDIO := false
 
 TARGET_BOOTLOADER_LIBS := \
 	libboot_board_motus \
@@ -52,9 +55,9 @@ BOARD_KERNEL_CMDLINE := no_console_suspend=1 console=null quiet
 
 BOARD_HAVE_BLUETOOTH := true
 
-BOARD_USES_GENERIC_AUDIO := true
-
 BOARD_VENDOR_USE_AKMD := akm8973
+
+#BOARD_USES_QCOM_HARDWARE := true
 
 BOARD_VENDOR_QCOM_AMSS_VERSION := 6220
 
@@ -62,15 +65,16 @@ BOARD_VENDOR_QCOM_AMSS_VERSION := 6220
 BOARD_FLASH_BLOCK_SIZE := 131072
 
 # OpenGL drivers config file path
-BOARD_EGL_CFG := device/motorola/motus/egl.cfg
+# not ready yet
+#BOARD_EGL_CFG := device/motorola/motus/egl.cfg
 
 # Use libcamera2
-BOARD_USES_OLD_CAMERA_HACK := true
+#BOARD_USES_OLD_CAMERA_HACK := true
 
 # No authoring clock for OpenCore on Motus
 BOARD_NO_PV_AUTHORING_CLOCK := true
 
-BOARD_USES_QCOM_LIBS := true
+BOARD_USES_ECLAIR_LIBCAMERA := true
 
 TARGET_RELEASETOOLS_EXTENSIONS := device/motorola/common
 

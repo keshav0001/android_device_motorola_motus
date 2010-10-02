@@ -10,6 +10,10 @@ ro.board.platform=
 # ro.build.product is obsolete; use ro.product.device
 ro.build.product=motus
 
+# AT&T/Moto settings
+ro.com.google.clientidbase=android-motorola
+ro.com.google.clientidbase.am=android-att-us
+
 rild.libargs=-d /dev/smd0
 DEVICE_PROVISIONED=1
 ro.mot.hw.tabletop=1
