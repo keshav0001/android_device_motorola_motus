@@ -18,9 +18,8 @@
 
 DEVICE=motus
 
-mkdir -p ../../../vendor/motorola/$DEVICE/proprietary
-mkdir -p ../../../vendor/motorola/$DEVICE/proprietary/touchpad
-mkdir -p ../../../vendor/motorola/$DEVICE/proprietary/minipad
+mkdir -p ../../../vendor/motorola/$DEVICE/proprietary/etc/touchpad
+mkdir -p ../../../vendor/motorola/$DEVICE/proprietary/etc/minipad
 unzip -j -o ../../../${DEVICE}_update.zip system/bin/akmd -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/bin/touchpad -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/bin/minipadut -d ../../../vendor/motorola/$DEVICE/proprietary
@@ -29,12 +28,12 @@ unzip -j -o ../../../${DEVICE}_update.zip system/bin/tcmd_engine -d ../../../ven
 unzip -j -o ../../../${DEVICE}_update.zip system/bin/fuel_gauge -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/bin/port_bridge -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/etc/akm/akmd_set.cfg -d ../../../vendor/motorola/$DEVICE/proprietary
-unzip -j -o ../../../${DEVICE}_update.zip system/etc/touchpad/50/saveconfig.cfg -d ../../../vendor/motorola/$DEVICE/proprietary/touchpad
-unzip -j -o ../../../${DEVICE}_update.zip system/etc/touchpad/50/touchpad.cfg -d ../../../vendor/motorola/$DEVICE/proprietary/touchpad
-unzip -j -o ../../../${DEVICE}_update.zip system/etc/touchpad/50/touchpad.enc -d ../../../vendor/motorola/$DEVICE/proprietary/touchpad
-unzip -j -o ../../../${DEVICE}_update.zip system/etc/minipad/104/minipad.cfg -d ../../../vendor/motorola/$DEVICE/proprietary/minipad
-unzip -j -o ../../../${DEVICE}_update.zip system/etc/minipad/104/minipad.enc -d ../../../vendor/motorola/$DEVICE/proprietary/minipad
-unzip -j -o ../../../${DEVICE}_update.zip system/etc/minipad/104/saveconfig.cfg -d ../../../vendor/motorola/$DEVICE/proprietary/minipad
+unzip -j -o ../../../${DEVICE}_update.zip system/etc/touchpad/50/saveconfig.cfg -d ../../../vendor/motorola/$DEVICE/proprietary/etc/touchpad
+unzip -j -o ../../../${DEVICE}_update.zip system/etc/touchpad/50/touchpad.cfg -d ../../../vendor/motorola/$DEVICE/proprietary/etc/touchpad
+unzip -j -o ../../../${DEVICE}_update.zip system/etc/touchpad/50/touchpad.enc -d ../../../vendor/motorola/$DEVICE/proprietary/etc/touchpad
+unzip -j -o ../../../${DEVICE}_update.zip system/etc/minipad/104/minipad.cfg -d ../../../vendor/motorola/$DEVICE/proprietary/etc/minipad
+unzip -j -o ../../../${DEVICE}_update.zip system/etc/minipad/104/minipad.enc -d ../../../vendor/motorola/$DEVICE/proprietary/etc/minipad
+unzip -j -o ../../../${DEVICE}_update.zip system/etc/minipad/104/saveconfig.cfg -d ../../../vendor/motorola/$DEVICE/proprietary/etc/minipad
 unzip -j -o ../../../${DEVICE}_update.zip system/etc/AudioFilter.csv -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/etc/AudioPara4.csv -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/etc/firmware/bcm4325.hcd -d ../../../vendor/motorola/$DEVICE/proprietary
@@ -45,6 +44,8 @@ unzip -j -o ../../../${DEVICE}_update.zip system/lib/libaudioeq.so -d ../../../v
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/libril-qc-1.so -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/libqmi.so -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/libqueue.so -d ../../../vendor/motorola/$DEVICE/proprietary
+unzip -j -o ../../../${DEVICE}_update.zip system/lib/libloc_api.so -d ../../../vendor/motorola/$DEVICE/proprietary
+unzip -j -o ../../../${DEVICE}_update.zip system/lib/libloc_api-rpc.so -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/libdsm.so -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/libsnd.so -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/libnv.so -d ../../../vendor/motorola/$DEVICE/proprietary
@@ -87,7 +88,9 @@ unzip -j -o ../../../${DEVICE}_update.zip system/usr/keychars/adp5588_motus_P3.k
 
 # Prebuilt libraries that are needed to build open-source libraries
 PRODUCT_COPY_FILES := \\
-    vendor/motorola/motus/proprietary/libcamera.so:obj/lib/libcamera.so
+    vendor/motorola/motus/proprietary/libcamera.so:obj/lib/libcamera.so \\
+    vendor/motorola/motus/proprietary/libloc_api-rpc.so:obj/lib/libloc_api-rpc.so \\
+    vendor/motorola/motus/proprietary/libloc_api.so:obj/lib/libloc_api.so
 
 
 # All the blobs necessary for motus
@@ -100,12 +103,12 @@ PRODUCT_COPY_FILES += \\
     vendor/motorola/__DEVICE__/proprietary/port_bridge:system/bin/port_bridge \\
     vendor/motorola/__DEVICE__/proprietary/tcmd_engine:system/bin/tcmd_engine \\
     vendor/motorola/__DEVICE__/proprietary/akmd_set.cfg:system/etc/akm/akmd_set.cfg \\
-    vendor/motorola/__DEVICE__/proprietary/touchpad/touchpad.enc:system/etc/touchpad/50/touchpad.enc \\
-    vendor/motorola/__DEVICE__/proprietary/touchpad/touchpad.cfg:system/etc/touchpad/50/touchpad.cfg \\
-    vendor/motorola/__DEVICE__/proprietary/touchpad/saveconfig.cfg:system/etc/touchpad/50/saveconfig.cfg \\
-    vendor/motorola/__DEVICE__/proprietary/minipad/minipad.cfg:system/etc/minipad/104/minipad.cfg \\
-    vendor/motorola/__DEVICE__/proprietary/minipad/minipad.enc:system/etc/minipad/104/minipad.enc \\
-    vendor/motorola/__DEVICE__/proprietary/minipad/saveconfig.cfg:system/etc/minipad/104/saveconfig.cfg \\
+    vendor/motorola/__DEVICE__/proprietary/etc/touchpad/touchpad.enc:system/etc/touchpad/50/touchpad.enc \\
+    vendor/motorola/__DEVICE__/proprietary/etc/touchpad/touchpad.cfg:system/etc/touchpad/50/touchpad.cfg \\
+    vendor/motorola/__DEVICE__/proprietary/etc/touchpad/saveconfig.cfg:system/etc/touchpad/50/saveconfig.cfg \\
+    vendor/motorola/__DEVICE__/proprietary/etc/minipad/minipad.cfg:system/etc/minipad/104/minipad.cfg \\
+    vendor/motorola/__DEVICE__/proprietary/etc/minipad/minipad.enc:system/etc/minipad/104/minipad.enc \\
+    vendor/motorola/__DEVICE__/proprietary/etc/minipad/saveconfig.cfg:system/etc/minipad/104/saveconfig.cfg \\
     vendor/motorola/__DEVICE__/proprietary/AudioFilter.csv:system/etc/AudioFilter.csv \\
     vendor/motorola/__DEVICE__/proprietary/AudioPara4.csv:system/etc/AudioPara4.csv \\
     vendor/motorola/__DEVICE__/proprietary/bcm4325.hcd:system/etc/firmware/bcm4325.hcd \\
@@ -118,8 +121,10 @@ PRODUCT_COPY_FILES += \\
     vendor/motorola/__DEVICE__/proprietary/libwmsts.so:system/lib/libwmsts.so \\
     vendor/motorola/__DEVICE__/proprietary/libqmi.so:system/lib/libqmi.so \\
     vendor/motorola/__DEVICE__/proprietary/libqueue.so:system/lib/libqueue.so \\
+    vendor/motorola/__DEVICE__/proprietary/libloc_api.so:system/lib/libloc_api.so \\
+    vendor/motorola/__DEVICE__/proprietary/libloc_api-rpc.so:system/lib/libloc_api-rpc.so \\
     vendor/motorola/__DEVICE__/proprietary/libdsm.so:system/lib/libdsm.so \\
-    vendor/motorola/__DEVICE__/proprietary/libdsnd.so:system/lib/libdsnd.so \\
+    vendor/motorola/__DEVICE__/proprietary/libsnd.so:system/lib/libsnd.so \\
     vendor/motorola/__DEVICE__/proprietary/libnv.so:system/lib/libnv.so \\
     vendor/motorola/__DEVICE__/proprietary/libwmsts.so:system/lib/libwmsts.so \\
     vendor/motorola/__DEVICE__/proprietary/libcm.so:system/lib/libcm.so \\

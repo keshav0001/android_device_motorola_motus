@@ -27,7 +27,6 @@
 TARGET_BOARD_PLATFORM := msm7k
 TARGET_CPU_ABI := armeabi
 TARGET_ARCH_VARIANT := armv6j
-
 TARGET_NO_BOOTLOADER := true
 
 
@@ -54,6 +53,7 @@ TARGET_BOOTLOADER_LINK_SCRIPT := \
 BOARD_KERNEL_CMDLINE := no_console_suspend=1 console=null quiet
 
 BOARD_HAVE_BLUETOOTH := true
+BOARD_HAVE_BLUETOOTH_BCM := true
 
 BOARD_VENDOR_USE_AKMD := akm8973
 
@@ -69,12 +69,10 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 #BOARD_EGL_CFG := device/motorola/motus/egl.cfg
 
 # Use libcamera2
-#BOARD_USES_OLD_CAMERA_HACK := true
+BOARD_USES_OLD_CAMERA_HACK := true
 
 # No authoring clock for OpenCore on Motus
 BOARD_NO_PV_AUTHORING_CLOCK := true
-
-BOARD_USES_ECLAIR_LIBCAMERA := true
 
 TARGET_RELEASETOOLS_EXTENSIONS := device/motorola/common
 

@@ -15,7 +15,6 @@ ro.com.google.clientidbase=android-motorola
 ro.com.google.clientidbase.am=android-att-us
 
 rild.libargs=-d /dev/smd0
-DEVICE_PROVISIONED=1
 ro.mot.hw.tabletop=1
 ro.mot.hw.dispbl.anim=1
 ro.mot.hw.keypadbl.anim=1

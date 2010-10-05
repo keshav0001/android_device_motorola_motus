@@ -45,7 +45,6 @@ PRODUCT_PROPERTY_OVERRIDES := \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     rild.libpath=/system/lib/libril-qc-1.so \
-    rild.libargs=-d /dev/smd0 \
     wifi.interface=eth0 \
     wifi.supplicant_scan_interval=15
 
@@ -75,8 +74,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # The OpenGL ES API level that is natively supported by this device.
 # This is a 16.16 fixed point number
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.opengles.version=65536
+#PRODUCT_PROPERTY_OVERRIDES += \
+#    ro.opengles.version=65536
 
 # media configuration xml file
 PRODUCT_COPY_FILES += \
