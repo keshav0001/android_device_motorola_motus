@@ -21,8 +21,8 @@ DEVICE=motus
 mkdir -p ../../../vendor/motorola/$DEVICE/proprietary/etc/touchpad
 mkdir -p ../../../vendor/motorola/$DEVICE/proprietary/etc/minipad
 adb pull /system/bin/akmd ../../../vendor/motorola/$DEVICE/proprietary/
-adb pull /system/bin/touchpad ../../../vendor/motorola/$DEVICE/proprietary/
-adb pull /system/bin/minipadut ../../../vendor/motorola/$DEVICE/proprietary/
+adb pull /system/bin/touchpad ../../../vendor/motorola/$DEVICE/proprietary/touchpad/
+adb pull /system/bin/minipadut ../../../vendor/motorola/$DEVICE/proprietary/minipad/
 adb pull /system/bin/qmuxd ../../../vendor/motorola/$DEVICE/proprietary/
 adb pull /system/bin/fuel_gauge ../../../vendor/motorola/$DEVICE/proprietary/
 adb pull /system/bin/port_bridge ../../../vendor/motorola/$DEVICE/proprietary/
@@ -49,6 +49,7 @@ adb pull /system/lib/libloc_api.so ../../../vendor/motorola/$DEVICE/proprietary/
 adb pull /system/lib/libsnd.so ../../../vendor/motorola/$DEVICE/proprietary/
 adb pull /system/lib/libwmsts.so ../../../vendor/motorola/$DEVICE/proprietary/
 adb pull /system/lib/libcm.so ../../../vendor/motorola/$DEVICE/proprietary/
+adb pull /system/lib/libcamera.so ../../../vendor/motorola/$DEVICE/proprietary/
 adb pull /system/lib/libnv.so ../../../vendor/motorola/$DEVICE/proprietary/
 adb pull /system/lib/libdss.so ../../../vendor/motorola/$DEVICE/proprietary/
 adb pull /system/lib/libgsdi_exp.so ../../../vendor/motorola/$DEVICE/proprietary/
@@ -88,13 +89,14 @@ adb pull /system/usr/keychars/adp5588_motus_P3.kcm.bin ../../../vendor/motorola/
 # Prebuilt libraries that are needed to build open-source libraries
 PRODUCT_COPY_FILES := \\
     vendor/motorola/motus/proprietary/libloc_api-rpc.so:obj/lib/libloc_api-rpc.so \\
+    vendor/motorola/motus/proprietary/libcamera.so:obj/lib/libcamera.so \\
     vendor/motorola/motus/proprietary/libloc_api.so:obj/lib/libloc_api.so
 
 # All the blobs necessary for motus
 PRODUCT_COPY_FILES += \\
     vendor/motorola/__DEVICE__/proprietary/akmd:system/bin/akmd \\
-    vendor/motorola/__DEVICE__/proprietary/touchpad:system/bin/touchpad \\
-    vendor/motorola/__DEVICE__/proprietary/minipadut:system/bin/minipadut \\
+    vendor/motorola/__DEVICE__/proprietary/touchpad/touchpad:system/bin/touchpad \\
+    vendor/motorola/__DEVICE__/proprietary/minipad/minipadut:system/bin/minipadut \\
     vendor/motorola/__DEVICE__/proprietary/qmuxd:system/bin/qmuxd \\
     vendor/motorola/__DEVICE__/proprietary/fuel_gauge:system/bin/fuel_gauge \\
     vendor/motorola/__DEVICE__/proprietary/port_bridge:system/bin/port_bridge \\
@@ -124,6 +126,7 @@ PRODUCT_COPY_FILES += \\
     vendor/motorola/__DEVICE__/proprietary/libnv.so:system/lib/libnv.so \\
     vendor/motorola/__DEVICE__/proprietary/libwmsts.so:system/lib/libwmsts.so \\
     vendor/motorola/__DEVICE__/proprietary/libcm.so:system/lib/libcm.so \\
+    vendor/motorola/__DEVICE__/proprietary/libcamera.so:system/lib/libcamera.so \\
     vendor/motorola/__DEVICE__/proprietary/libdss.so:system/lib/libdss.so \\
     vendor/motorola/__DEVICE__/proprietary/libmmgsdilib.so:system/lib/libmmgsdilib.so \\
     vendor/motorola/__DEVICE__/proprietary/libgsdi_exp.so:system/lib/libgsdi_exp.so \\

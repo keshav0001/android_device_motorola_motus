@@ -24,7 +24,6 @@ PRODUCT_PACKAGES += \
     VoiceDialer \
     sensors.motus \
     leds.motus \
-    librs_jni \
     lights.motus
 
 # Install the features available on this device.
@@ -45,14 +44,13 @@ PRODUCT_PROPERTY_OVERRIDES := \
 
 PRODUCT_PROPERTY_OVERRIDES += \
     rild.libpath=/system/lib/libril-qc-1.so \
-    wifi.interface=eth0 \
-    wifi.supplicant_scan_interval=15
+    wifi.interface=eth0
 
 # Time between scans in seconds. Keep it high to minimize battery drain.
 # This only affects the case in which there are remembered access points,
 # but none are in range.
 PRODUCT_PROPERTY_OVERRIDES += \
-    wifi.supplicant_scan_interval=15
+    wifi.supplicant_scan_interval=45
 
 # density in DPI of the LCD of this board. This is used to scale the UI
 # appropriately. If this property is not defined, the default value is 160 dpi. 
@@ -64,18 +62,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.default_network=0
 
-# Disable JIT by default
-PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.execution-mode=int:fast
-
 # enable insecure AGPS
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.ril.def.agps.mode=2
 
 # The OpenGL ES API level that is natively supported by this device.
 # This is a 16.16 fixed point number
-#PRODUCT_PROPERTY_OVERRIDES += \
-#    ro.opengles.version=65536
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.opengles.version=65536
 
 # media configuration xml file
 PRODUCT_COPY_FILES += \
@@ -97,6 +91,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/motorola/motus/vold.fstab:system/etc/vold.fstab \
     device/motorola/motus/gps.conf:system/etc/gps.conf \
+    device/motorola/motus/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
+    device/motorola/motus/backoff.conf:system/etc/wifi/backoff.conf \
     device/motorola/motus/apns-conf.xml:system/etc/apns-conf.xml
 
 PRODUCT_COPY_FILES += \
@@ -111,12 +107,10 @@ PRODUCT_COPY_FILES += \
     device/motorola/motus/modules/2.6.27-kernelzilla/modules.alias.bin:system/lib/modules/2.6.27-kernelzilla/modules.alias.bin \
     device/motorola/motus/modules/2.6.27-kernelzilla/modules.ccwmap:system/lib/modules/2.6.27-kernelzilla/modules.ccwmap \
     device/motorola/motus/modules/2.6.27-kernelzilla/modules.usbmap:system/lib/modules/2.6.27-kernelzilla/modules.usbmap \
-    device/motorola/motus/modules/2.6.27-kernelzilla/modules.isapnpmap:system/lib/modules/2.6.27-kernelzilla/modules.isapnpmap \
     device/motorola/motus/modules/2.6.27-kernelzilla/modules.symbols:system/lib/modules/2.6.27-kernelzilla/modules.symbols \
     device/motorola/motus/modules/2.6.27-kernelzilla/modules.dep.bin:system/lib/modules/2.6.27-kernelzilla/modules.dep.bin \
     device/motorola/motus/modules/2.6.27-kernelzilla/modules.dep:system/lib/modules/2.6.27-kernelzilla/modules.dep \
     device/motorola/motus/modules/2.6.27-kernelzilla/modules.symbols.bin:system/lib/modules/2.6.27-kernelzilla/modules.symbols.bin \
-    device/motorola/motus/modules/2.6.27-kernelzilla/modules.pcimap:system/lib/modules/2.6.27-kernelzilla/modules.pcimap \
     device/motorola/motus/modules/2.6.27-kernelzilla/modules.inputmap:system/lib/modules/2.6.27-kernelzilla/modules.inputmap
 
 ## (2) Also get non-open-source aspects if available

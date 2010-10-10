@@ -44,6 +44,7 @@ unzip -j -o ../../../${DEVICE}_update.zip system/lib/libaudioeq.so -d ../../../v
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/libril-qc-1.so -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/libqmi.so -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/libqueue.so -d ../../../vendor/motorola/$DEVICE/proprietary
+unzip -j -o ../../../${DEVICE}_update.zip system/lib/libcamera.so -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/libloc_api.so -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/libloc_api-rpc.so -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/libdsm.so -d ../../../vendor/motorola/$DEVICE/proprietary
@@ -58,7 +59,7 @@ unzip -j -o ../../../${DEVICE}_update.zip system/lib/libgstk_exp.so -d ../../../
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/libwms.so -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/liboncrpc.so -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/libmm-adspsvc.so -d ../../../vendor/motorola/$DEVICE/proprietary
-unzip -j -o ../../../${DEVICE}_update.zip system/lib/libmmcamera.so -d ../../../vendor/motorola/$DEVICE/proprietary
+unzip -j -o ../../../${DEVICE}_update.zip system/lib/liboemcamera.so -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/libOmxH264Dec.so -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/libOmxMpeg4Dec.so -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/libOmxVidEnc.so -d ../../../vendor/motorola/$DEVICE/proprietary
@@ -135,7 +136,7 @@ PRODUCT_COPY_FILES += \\
     vendor/motorola/__DEVICE__/proprietary/libwms.so:system/lib/libwms.so \\
     vendor/motorola/__DEVICE__/proprietary/liboncrpc.so:system/lib/liboncrpc.so \\
     vendor/motorola/__DEVICE__/proprietary/libmm-adspsvc.so:system/lib/libmm-adspsvc.so \\
-    vendor/motorola/__DEVICE__/proprietary/libmmcamera.so:system/lib/liboemcamera.so \\
+    vendor/motorola/__DEVICE__/proprietary/liboemcamera.so:system/lib/liboemcamera.so \\
     vendor/motorola/__DEVICE__/proprietary/libOmxH264Dec.so:system/lib/libOmxH264Dec.so \\
     vendor/motorola/__DEVICE__/proprietary/libOmxMpeg4Dec.so:system/lib/libOmxMpeg4Dec.so \\
     vendor/motorola/__DEVICE__/proprietary/libOmxVidEnc.so:system/lib/libOmxVidEnc.so \\

@@ -59,20 +59,19 @@ BOARD_VENDOR_USE_AKMD := akm8973
 
 #BOARD_USES_QCOM_HARDWARE := true
 
-BOARD_VENDOR_QCOM_AMSS_VERSION := 6220
+BOARD_VENDOR_QCOM_AMSS_VERSION := 6225
 
 # The size of a block that can be marked bad.
 BOARD_FLASH_BLOCK_SIZE := 131072
 
 # OpenGL drivers config file path
-# not ready yet
 #BOARD_EGL_CFG := device/motorola/motus/egl.cfg
 
 # Use libcamera2
-BOARD_USES_OLD_CAMERA_HACK := true
+#BOARD_USES_OLD_CAMERA_HACK := true
 
 # No authoring clock for OpenCore on Motus
-BOARD_NO_PV_AUTHORING_CLOCK := true
+#BOARD_NO_PV_AUTHORING_CLOCK := true
 
 TARGET_RELEASETOOLS_EXTENSIONS := device/motorola/common
 
