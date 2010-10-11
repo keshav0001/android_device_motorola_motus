@@ -25,10 +25,16 @@
 -include vendor/motorola/motus/BoardConfigVendor.mk
 
 TARGET_BOARD_PLATFORM := msm7k
-TARGET_CPU_ABI := armeabi
-TARGET_ARCH_VARIANT := armv6j
-TARGET_NO_BOOTLOADER := true
+TARGET_BOARD_PLATFORM_GPU := qcom
 
+TARGET_NO_BOOTLOADER := true
+#TARGET_NO_RADIOIMAGE := true
+#TARGET_NO_RECOVERY := true
+
+# ARMv6-compatible processor rev 5 (v6l)
+TARGET_CPU_ABI := armeabi-v6j
+TARGET_CPU_ABI2 := armeabi
+TARGET_ARCH_VARIANT := armv6j
 
 # Wifi related defines
 BOARD_WPA_SUPPLICANT_DRIVER := wpa_supplicant
