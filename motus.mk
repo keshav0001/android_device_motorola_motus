@@ -58,9 +58,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=160
 
 # Default network type
-# 0 => WCDMA Preferred.
+# 1 => GSM Only.
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.telephony.default_network=0
+    ro.telephony.default_network=1
 
 # enable insecure AGPS
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -92,8 +92,7 @@ PRODUCT_COPY_FILES += \
     device/motorola/motus/vold.fstab:system/etc/vold.fstab \
     device/motorola/motus/gps.conf:system/etc/gps.conf \
     device/motorola/motus/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
-    device/motorola/motus/backoff.conf:system/etc/wifi/backoff.conf \
-    device/motorola/motus/apns-conf.xml:system/etc/apns-conf.xml
+    device/motorola/motus/backoff.conf:system/etc/wifi/backoff.conf
 
 PRODUCT_COPY_FILES += \
     device/motorola/motus/modules/2.6.27-kernelzilla/modules.seriomap:system/lib/modules/2.6.27-kernelzilla/modules.seriomap \

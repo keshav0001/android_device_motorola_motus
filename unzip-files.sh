@@ -25,6 +25,7 @@ unzip -j -o ../../../${DEVICE}_update.zip system/bin/touchpad -d ../../../vendor
 unzip -j -o ../../../${DEVICE}_update.zip system/bin/minipadut -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/bin/qmuxd -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/bin/tcmd_engine -d ../../../vendor/motorola/$DEVICE/proprietary
+unzip -j -o ../../../${DEVICE}_update.zip system/bin/tcmd_sql -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/bin/fuel_gauge -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/bin/port_bridge -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/etc/akm/akmd_set.cfg -d ../../../vendor/motorola/$DEVICE/proprietary
@@ -42,10 +43,12 @@ unzip -j -o ../../../${DEVICE}_update.zip system/etc/firmware/fw_bcm4325_apsta.b
 unzip -j -o ../../../${DEVICE}_update.zip system/etc/firmware/nvram.txt -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/libaudioeq.so -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/libril-qc-1.so -d ../../../vendor/motorola/$DEVICE/proprietary
+unzip -j -o ../../../${DEVICE}_update.zip system/lib/libril-moto-umts-1.so -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/libqmi.so -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/libqueue.so -d ../../../vendor/motorola/$DEVICE/proprietary
-unzip -j -o ../../../${DEVICE}_update.zip system/lib/libcamera.so -d ../../../vendor/motorola/$DEVICE/proprietary
+unzip -j -o ../../../${DEVICE}_update.zip system/lib/libgps.so -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/libloc_api.so -d ../../../vendor/motorola/$DEVICE/proprietary
+unzip -j -o ../../../${DEVICE}_update.zip system/lib/libloc_ext.so -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/libloc_api-rpc.so -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/libdsm.so -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/libsnd.so -d ../../../vendor/motorola/$DEVICE/proprietary
@@ -65,6 +68,7 @@ unzip -j -o ../../../${DEVICE}_update.zip system/lib/libOmxMpeg4Dec.so -d ../../
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/libOmxVidEnc.so -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/libOmxCore.so -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/lib/libmm-omxcore.so -d ../../../vendor/motorola/$DEVICE/proprietary
+unzip -j -o ../../../${DEVICE}_update.zip system/lib/libmmjpeg.so -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/usr/keychars/adp5588_motus.kcm.bin -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/usr/keychars/adp5588_motus_P1.kcm.bin -d ../../../vendor/motorola/$DEVICE/proprietary
 unzip -j -o ../../../${DEVICE}_update.zip system/usr/keychars/adp5588_motus_P2.kcm.bin -d ../../../vendor/motorola/$DEVICE/proprietary
@@ -89,9 +93,10 @@ unzip -j -o ../../../${DEVICE}_update.zip system/usr/keychars/adp5588_motus_P3.k
 
 # Prebuilt libraries that are needed to build open-source libraries
 PRODUCT_COPY_FILES := \\
-    vendor/motorola/motus/proprietary/libcamera.so:obj/lib/libcamera.so \\
     vendor/motorola/motus/proprietary/libloc_api-rpc.so:obj/lib/libloc_api-rpc.so \\
-    vendor/motorola/motus/proprietary/libloc_api.so:obj/lib/libloc_api.so
+    vendor/motorola/motus/proprietary/libloc_api.so:obj/lib/libloc_api.so \\
+    vendor/motorola/motus/proprietary/libloc_ext.so:obj/lib/libloc_ext.so \\
+    vendor/motorola/motus/proprietary/libgps.so:obj/lib/libgps.so
 
 
 # All the blobs necessary for motus
@@ -103,6 +108,7 @@ PRODUCT_COPY_FILES += \\
     vendor/motorola/__DEVICE__/proprietary/fuel_gauge:system/bin/fuel_gauge \\
     vendor/motorola/__DEVICE__/proprietary/port_bridge:system/bin/port_bridge \\
     vendor/motorola/__DEVICE__/proprietary/tcmd_engine:system/bin/tcmd_engine \\
+    vendor/motorola/__DEVICE__/proprietary/tcmd_sql:system/bin/tcmd_sql \\
     vendor/motorola/__DEVICE__/proprietary/akmd_set.cfg:system/etc/akm/akmd_set.cfg \\
     vendor/motorola/__DEVICE__/proprietary/etc/touchpad/touchpad.enc:system/etc/touchpad/50/touchpad.enc \\
     vendor/motorola/__DEVICE__/proprietary/etc/touchpad/touchpad.cfg:system/etc/touchpad/50/touchpad.cfg \\
@@ -117,11 +123,13 @@ PRODUCT_COPY_FILES += \\
     vendor/motorola/__DEVICE__/proprietary/fw_bcm4325_apsta.bin:system/etc/firmware/fw_bcm4325_apsta.bin \\
     vendor/motorola/__DEVICE__/proprietary/nvram.txt:system/etc/firmware/nvram.txt \\
     vendor/motorola/__DEVICE__/proprietary/libaudioeq.so:system/lib/libaudioeq.so \\
-    vendor/motorola/__DEVICE__/proprietary/libcamera.so:system/lib/libcamera.so \\
     vendor/motorola/__DEVICE__/proprietary/libril-qc-1.so:system/lib/libril-qc-1.so \\
+    vendor/motorola/__DEVICE__/proprietary/libril-moto-umts-1.so:system/lib/libril-moto-umts-1.so \\
     vendor/motorola/__DEVICE__/proprietary/libwmsts.so:system/lib/libwmsts.so \\
     vendor/motorola/__DEVICE__/proprietary/libqmi.so:system/lib/libqmi.so \\
     vendor/motorola/__DEVICE__/proprietary/libqueue.so:system/lib/libqueue.so \\
+    vendor/motorola/__DEVICE__/proprietary/libgps.so:system/lib/libgps.so \\
+    vendor/motorola/__DEVICE__/proprietary/libloc_ext.so:system/lib/libloc_ext.so \\
     vendor/motorola/__DEVICE__/proprietary/libloc_api.so:system/lib/libloc_api.so \\
     vendor/motorola/__DEVICE__/proprietary/libloc_api-rpc.so:system/lib/libloc_api-rpc.so \\
     vendor/motorola/__DEVICE__/proprietary/libdsm.so:system/lib/libdsm.so \\
@@ -142,6 +150,7 @@ PRODUCT_COPY_FILES += \\
     vendor/motorola/__DEVICE__/proprietary/libOmxVidEnc.so:system/lib/libOmxVidEnc.so \\
     vendor/motorola/__DEVICE__/proprietary/libOmxCore.so:system/lib/libOmxCore.so \\
     vendor/motorola/__DEVICE__/proprietary/libmm-omxcore.so:system/lib/libmm-omxcore.so \\
+    vendor/motorola/__DEVICE__/proprietary/libmmjpeg.so:system/lib/libmmjpeg.so \\
     vendor/motorola/__DEVICE__/proprietary/adp5588_motus.kcm.bin:system/usr/keychars/adp5588_motus.kcm.bin \\
     vendor/motorola/__DEVICE__/proprietary/adp5588_motus_P1.kcm.bin:system/usr/keychars/adp5588_motus_P1.kcm.bin \\
     vendor/motorola/__DEVICE__/proprietary/adp5588_motus_P2.kcm.bin:system/usr/keychars/adp5588_motus_P2.kcm.bin \\

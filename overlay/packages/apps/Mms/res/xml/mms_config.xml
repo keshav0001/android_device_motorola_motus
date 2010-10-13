@@ -34,5 +34,5 @@
     <!-- UAProf URL -->
     <string name="uaProfUrl">http://uaprof.motorola.com/phoneconfig/MotoMB200/profile/MotoMB200.rdf</string>
 
-    <string name="userAgent">Android-Mms/2.0</string>
+    <string name="userAgent">Android-Mms/1.0</string>
 </mms_config>

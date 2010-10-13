@@ -28,8 +28,8 @@ TARGET_BOARD_PLATFORM := msm7k
 TARGET_BOARD_PLATFORM_GPU := qcom
 
 TARGET_NO_BOOTLOADER := true
-#TARGET_NO_RADIOIMAGE := true
-#TARGET_NO_RECOVERY := true
+TARGET_NO_RADIOIMAGE := true
+TARGET_NO_RECOVERY := true
 
 # ARMv6-compatible processor rev 5 (v6l)
 TARGET_CPU_ABI := armeabi-v6j
@@ -37,9 +37,9 @@ TARGET_CPU_ABI2 := armeabi
 TARGET_ARCH_VARIANT := armv6j
 
 # Wifi related defines
-BOARD_WPA_SUPPLICANT_DRIVER := wpa_supplicant
+BOARD_WPA_SUPPLICANT_DRIVER := WEXT
 WPA_SUPPLICANT_VERSION      := VER_0_6_X
-BOARD_WLAN_DEVICE           := dhd
+BOARD_WLAN_DEVICE           := bcm4325
 WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/dhd.ko"
 WIFI_DRIVER_FW_STA_PATH     := "/system/etc/firmware/fw_bcm4325.bin"
 WIFI_DRIVER_FW_AP_PATH      := "/system/etc/firmware/fw_bcm4325_apsta.bin"
@@ -60,10 +60,14 @@ BOARD_KERNEL_CMDLINE := no_console_suspend=1 console=null quiet
 
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
+BT_USE_BTL_IF := true
+BT_ALT_STACK := true
+BRCM_BTL_INCLUDE_A2DP := true
+BRCM_BT_USE_BTL_IF := true
 
 BOARD_VENDOR_USE_AKMD := akm8973
 
-#BOARD_USES_QCOM_HARDWARE := true
+BOARD_USES_QCOM_HARDWARE := true
 
 BOARD_VENDOR_QCOM_AMSS_VERSION := 6225
 
@@ -71,13 +75,13 @@ BOARD_VENDOR_QCOM_AMSS_VERSION := 6225
 BOARD_FLASH_BLOCK_SIZE := 131072
 
 # OpenGL drivers config file path
-#BOARD_EGL_CFG := device/motorola/motus/egl.cfg
+BOARD_EGL_CFG := device/motorola/motus/egl.cfg
 
 # Use libcamera2
-#BOARD_USES_OLD_CAMERA_HACK := true
+BOARD_USES_OLD_CAMERA_HACK := true
 
 # No authoring clock for OpenCore on Motus
-#BOARD_NO_PV_AUTHORING_CLOCK := true
+BOARD_NO_PV_AUTHORING_CLOCK := true
 
 TARGET_RELEASETOOLS_EXTENSIONS := device/motorola/common
 
@@ -99,7 +103,6 @@ BOARD_RECOVERYIMAGE_PARTITION_SIZE := 00500000
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 0x08ac0000
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x0df80000
 
-TARGET_NO_RECOVERY := true
 
 #TARGET_RECOVERY_UI_LIB := librecovery_ui_motus librecovery_ui_moto
 TARGET_PREBUILT_KERNEL := device/motorola/motus/kernel
