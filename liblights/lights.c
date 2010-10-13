@@ -16,7 +16,9 @@
 
 
 // #define LOG_NDEBUG 0
-#define LOG_TAG "lights"
+#define LOG_TAG "lights.motus"
+#define LIGHT_ID_KEYBOARD_ALPHA_SEG "keyboardalphaseg"
+#define LIGHT_ID_KEYBOARD_SYMBOLS_SEG "keyboardsymbolsseg"
 
 #include <cutils/log.h>
 
@@ -79,7 +81,7 @@ char const*const AMBER_BLINK_FILE
         = "/sys/class/leds/amber/blink";
 
 char const*const KEYBOARD_FILE
-        = "/sys/class/leds/keyboard-backlight/brightness";
+        = "/sys/class/leds/keyboard-tcmd/brightness";
 
 char const*const KEYBOARD_ALPHA_FILE
         = "/sys/class/leds/keyboard1-backlight/brightness";

@@ -68,6 +68,6 @@ EOF
 
 USE_CAMERA_STUB := false
 
-BOARD_GPS_LIBRARIES := libloc_api librpc libloc_api-rpc
+BOARD_GPS_LIBRARIES := libloc_api libloc_ext librpc libloc_api-rpc
 
 EOF
