@@ -47,6 +47,7 @@ WIFI_DRIVER_MODULE_ARG      := "firmware_path=/system/etc/firmware/fw_bcm4325.bi
 WIFI_DRIVER_MODULE_NAME     := "dhd"
 
 BOARD_USES_GENERIC_AUDIO := false
+BOARD_USES_QCOM_LIBS := true
 
 TARGET_BOOTLOADER_LIBS := \
 	libboot_board_motus \
