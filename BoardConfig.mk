@@ -61,6 +61,7 @@ BOARD_KERNEL_CMDLINE := no_console_suspend=1 console=null quiet
 
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
+BOARD_HAVE_FM_RADIO := true
 BT_USE_BTL_IF := true
 BT_ALT_STACK := true
 BRCM_BTL_INCLUDE_A2DP := true
