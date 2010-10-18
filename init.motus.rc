@@ -183,6 +183,9 @@ on boot
 
     write /sys/module/lowmemorykiller/parameters/minfree 1536,2048,4096,9216,10240,10240
 
+# enable insecure AGPS
+    setprop ro.ril.def.agps.mode 2
+
 # compass/accelerometer daemon
 service akmd /system/bin/akmd
     user compass
@@ -225,6 +228,10 @@ service hciattach /system/bin/brcm_patchram_plus --enable_hci --enable_lpm \
     group bluetooth net_bt_admin
     disabled
     oneshot
+
+#FMRadio Service
+#service fmradio /system/bin/fmradioserver
+# class BT
 
 # touchpad service
 service touchpad /system/bin/touchpad \

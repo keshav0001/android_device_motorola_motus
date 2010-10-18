@@ -62,7 +62,6 @@ adb pull /system/lib/libmm-adspsvc.so ../../../vendor/motorola/$DEVICE/proprieta
 adb pull /system/lib/libmmgsdilib.so ../../../vendor/motorola/$DEVICE/proprietary/
 adb pull /system/lib/liboncrpc.so ../../../vendor/motorola/$DEVICE/proprietary/
 adb pull /system/lib/liboemcamera.so ../../../vendor/motorola/$DEVICE/proprietary/
-adb pull /system/lib/libOmxCore.so ../../../vendor/motorola/$DEVICE/proprietary/
 adb pull /system/lib/libOmxH264Dec.so ../../../vendor/motorola/$DEVICE/proprietary/
 adb pull /system/lib/libOmxMpeg4Dec.so ../../../vendor/motorola/$DEVICE/proprietary/
 adb pull /system/lib/libOmxVidEnc.so ../../../vendor/motorola/$DEVICE/proprietary/
@@ -146,7 +145,6 @@ PRODUCT_COPY_FILES += \\
     vendor/motorola/__DEVICE__/proprietary/libOmxH264Dec.so:system/lib/libOmxH264Dec.so \\
     vendor/motorola/__DEVICE__/proprietary/libOmxMpeg4Dec.so:system/lib/libOmxMpeg4Dec.so \\
     vendor/motorola/__DEVICE__/proprietary/libOmxVidEnc.so:system/lib/libOmxVidEnc.so \\
-    vendor/motorola/__DEVICE__/proprietary/libOmxCore.so:system/lib/libOmxCore.so \\
     vendor/motorola/__DEVICE__/proprietary/libmm-omxcore.so:system/lib/libmm-omxcore.so \\
     vendor/motorola/__DEVICE__/proprietary/libmmjpeg.so:system/lib/libmmjpeg.so \\
     device/motorola/__DEVICE__/adp5588_motus.kl:/system/usr/keylayout/adp5588_motus.kl \\

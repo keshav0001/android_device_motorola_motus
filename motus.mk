@@ -61,6 +61,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # 1 => GSM Only.
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.default_network=1
+    
+# Disable JIT by default
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.execution-mode=int:fast
 
 # enable insecure AGPS
 PRODUCT_PROPERTY_OVERRIDES += \
