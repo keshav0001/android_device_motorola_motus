@@ -36,8 +36,8 @@ on boot
     setkey 0xc0 0x8b 0x707
     setkey 0xc0 0x6b 0x20c
 
-    mkdir /data/misc/wifi 0770 system wifi
-    mkdir /data/misc/wifi/sockets 0770 system wifi
+    mkdir /data/misc/wifi 0770 wifi wifi
+    mkdir /data/misc/wifi/sockets 0770 wifi wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     chown dhcp dhcp /data/misc/dhcp
 
@@ -46,16 +46,8 @@ on boot
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
     chmod 0660                /sys/class/rfkill/rfkill0/state
     # old kernel method:
-    chown bluetooth net_bt_admin /sys/module/board_motus/parameters/bluetooth_power_on
+    chown bluetooth bluetooth /sys/module/board_motus/parameters/bluetooth_power_on
     chmod 0660 /sys/module/board_motus/parameters/bluetooth_power_on
-    chown bluetooth net_bt_admin /sys/module/bluetooth_power/parameters/power
-    chown bluetooth net_bt_admin /proc/bluetooth/sleep/proto
-    chown system system /sys/module/sco/parameters/disable_esco
-    chmod 0660 /sys/module/bluetooth_power/parameters/power
-    chmod 0660 /proc/bluetooth/sleep/proto
-    chown bluetooth bluetooth /dev/ttyHS0
-    chmod 0660 /dev/ttyHS0
-    chmod 0666 /dev/msm_snd
     #proximity
     chown system system /sys/devices/platform/sfh7743.-2/proximity
     #radio
@@ -96,42 +88,28 @@ on boot
     chown system system /sys/module/sco/parameters/disable_esco
     chmod 0660 /sys/module/bluetooth_power/parameters/power
     chmod 0660 /proc/bluetooth/sleep/proto
-    chown bluetooth bluetooth /dev/ttyHS0
     chmod 0660 /dev/ttyHS0
-    chmod 0666 /dev/msm_snd
 
 # Vibrator
     chown system system /sys/class/vibrator/vibrator/enable
-
-# Broadcom stuff
-    mkdir /data/misc/wifi 0770 system wifi
-    mkdir /data/misc/dhcp 0770 system wifi
-    chown bluetooth bluetooth /sys/module/board_motus/parameters/bluetooth_power_on
-    chmod 0660 /sys/module/board_motus/parameters/bluetooth_power_on
 
 # 12m
     mkdir /data/local/12m 0775 system system
     mkdir /data/local/12m/batch 0775 system system
     mkdir /data/local/12m/batch/log 0775 system system
 
-#  E-compass
-    chown compass system /dev/akm8973_aot
-    chmod 0664 /dev/akm8973_aot
-    chown compass system /dev/akm8973_dev
-    chmod 0664 /dev/akm8973_dev
-
 # Accelerometer
-    chown compass system /sys/class/i2c-adapter/i2c-0/0-0018/mode
+    chown system system /sys/class/i2c-adapter/i2c-0/0-0018/mode
     chmod 0664 /sys/class/i2c-adapter/i2c-0/0-0018/mode
-    chown compass system /dev/accelerometer
+    chown system system /dev/accelerometer
     chmod 0664 /dev/accelerometer
 
 # touchscreen
-    chown system input /dev/touchpad
+    chown system system /dev/touchpad
     chmod 0666 /dev/touchpad
 
 # minipad
-    chown system input /dev/minipad
+    chown system system /dev/minipad
     chmod 0666 /dev/minipad
 
 # Camera LED brightness attributes accessible to all
@@ -155,7 +133,7 @@ on boot
     chown system system /dev/misc_helper
     chmod 0660 /dev/misc_helper
     chown system graphics /dev/graphics/fb0
-    chmod 0666 /dev/graphics/fb0
+    chmod 0664 /dev/graphics/fb0
     chmod 0644 /dev/block/mmcblk0p1
 
 # Permissions needed for port_bridge
@@ -167,7 +145,7 @@ on boot
 
     chown system system /sys/class/timed_output/vibrator/enable
     chown system system /sys/module/sco/parameters/disable_esco
-    ichown system system /sys/kernel/ipv4/tcp_wmem_min
+    chown system system /sys/kernel/ipv4/tcp_wmem_min
     chown system system /sys/kernel/ipv4/tcp_wmem_def
     chown system system /sys/kernel/ipv4/tcp_wmem_max
     chown system system /sys/kernel/ipv4/tcp_rmem_min
@@ -195,7 +173,7 @@ service akmd /system/bin/akmd
 #service tcmd /system/bin/tcmd_engine usb0
 #    user system - this makes reboot failing
 #    group system inet
-    socket local_tcmd stream 0660 system system
+#    socket local_tcmd stream 0660 system system
 
 service port_bridge /system/bin/port_bridge /dev/smd0 /dev/ttyHSUSB0
         user radio
@@ -250,6 +228,6 @@ service modemlog /system/bin/modemlog
     oneshot
 
 service minipadut /system/bin/minipadut -a
-   user system 
+   user system
    group input misc
    oneshot

@@ -37,7 +37,7 @@ TARGET_CPU_ABI2 := armeabi
 TARGET_ARCH_VARIANT := armv6j
 
 # Wifi related defines
-BOARD_WPA_SUPPLICANT_DRIVER := WEXT
+BOARD_WPA_SUPPLICANT_DRIVER := wpa_supplicant
 WPA_SUPPLICANT_VERSION      := VER_0_6_X
 BOARD_WLAN_DEVICE           := bcm4325
 WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/dhd.ko"
@@ -66,6 +66,7 @@ BT_USE_BTL_IF := true
 BT_ALT_STACK := true
 BRCM_BTL_INCLUDE_A2DP := true
 BRCM_BT_USE_BTL_IF := true
+BOARD_HAVE_FM_RADIO := true
 
 BOARD_VENDOR_USE_AKMD := akm8973
 
