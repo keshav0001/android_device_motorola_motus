@@ -50,6 +50,7 @@ adb pull /system/lib/libloc_api-rpc.so ../../../vendor/motorola/$DEVICE/propriet
 adb pull /system/lib/libloc_api.so ../../../vendor/motorola/$DEVICE/proprietary/
 adb pull /system/lib/libloc_ext.so ../../../vendor/motorola/$DEVICE/proprietary/
 adb pull /system/lib/libgps.so ../../../vendor/motorola/$DEVICE/proprietary/
+adb pull /system/lib/libqueue.so ../../../vendor/motorola/$DEVICE/proprietary/
 adb pull /system/lib/libsnd.so ../../../vendor/motorola/$DEVICE/proprietary/
 adb pull /system/lib/libwmsts.so ../../../vendor/motorola/$DEVICE/proprietary/
 adb pull /system/lib/libcm.so ../../../vendor/motorola/$DEVICE/proprietary/
