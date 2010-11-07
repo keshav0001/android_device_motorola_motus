@@ -25,6 +25,8 @@
 -include vendor/motorola/motus/BoardConfigVendor.mk
 
 TARGET_BOARD_PLATFORM := msm7k
+BOARD_USES_QCOM_7x_CHIPSET := true
+BOARD_USES_ADRENO_130 := true
 TARGET_BOARD_PLATFORM_GPU := qcom
 
 TARGET_NO_BOOTLOADER := true
@@ -66,7 +68,6 @@ BT_USE_BTL_IF := true
 BT_ALT_STACK := true
 BRCM_BTL_INCLUDE_A2DP := true
 BRCM_BT_USE_BTL_IF := true
-BOARD_HAVE_FM_RADIO := true
 
 BOARD_VENDOR_USE_AKMD := akm8973
 

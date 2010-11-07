@@ -89,24 +89,36 @@ on boot
     chmod 0660 /sys/module/bluetooth_power/parameters/power
     chmod 0660 /proc/bluetooth/sleep/proto
     chmod 0660 /dev/ttyHS0
+on init
 
 # Vibrator
     chown system system /sys/class/vibrator/vibrator/enable
 
+# Broadcom stuff
+    mkdir /data/misc/wifi 0770 system wifi
+    mkdir /data/misc/dhcp 0770 dhcp dhcp
+    chown dhcp dhcp /data/misc/dhcp
+    chown bluetooth bluetooth /sys/module/board_motus/parameters/bluetooth_power_on
+    chmod 0660 /sys/module/board_motus/parameters/bluetooth_power_on
+    chown bluetooth bluetooth /proc/bt_power
+    chmod 0666 /proc/bt_power
+
 # 12m
-    mkdir /data/local/12m 0775 system system
-    mkdir /data/local/12m/batch 0775 system system
-    mkdir /data/local/12m/batch/log 0775 system system
+    mkdir /data/local/12m 0771 system system
+    mkdir /data/local/12m/batch 0771 system system
+    mkdir /data/local/12m/batch/log 0771 system system
+ 
+#  E-compass  
+    chown system system /dev/akm8973_aot
+    chown system system /dev/akm8973_dev
 
 # Accelerometer
     chown system system /sys/class/i2c-adapter/i2c-0/0-0018/mode
     chmod 0664 /sys/class/i2c-adapter/i2c-0/0-0018/mode
     chown system system /dev/accelerometer
     chmod 0664 /dev/accelerometer
-
-# touchscreen
-    chown system system /dev/touchpad
-    chmod 0666 /dev/touchpad
+    chown system system /dev/lis331dlh
+    chmod 0664 /dev/lis331dlh
 
 # minipad
     chown system system /dev/minipad
@@ -133,15 +145,49 @@ on boot
     chown system system /dev/misc_helper
     chmod 0660 /dev/misc_helper
     chown system graphics /dev/graphics/fb0
-    chmod 0664 /dev/graphics/fb0
+# Google Skymap wants to copybit fb0 but requests no special privileges
+    chmod 0666 /dev/graphics/fb0
     chmod 0644 /dev/block/mmcblk0p1
 
 # Permissions needed for port_bridge
     chown root system /dev/ttyHSUSB0
     chmod 0660 /dev/ttyHSUSB0
 
+# Clearing FM/BT reference count temp file  contents
+    write /data/bluedroid_ref 123456
+    chmod 0777 /data/bluedroid_ref
+
 # Set WiFi interface name
     setprop wifi.interface eth0
+
+# Set up touchpad
+    chown system system /dev/touchpad
+    chmod 0664 /dev/touchpad
+
+#bluetooth 
+service hciattach /system/bin/brcm_patchram_plus --enable_hci --enable_lpm \
+    --baudrate 4000000 --patchram /etc/firmware/bcm4325.hcd /dev/ttyHS0
+    user bluetooth
+    group bluetooth net_bt_admin
+    disabled
+    oneshot
+
+# bugreport is triggered by the KEY_LEFTSHIFT and KEY_MENU keycodes
+service bugreport /system/bin/dumpstate -d -v -o /sdcard/bugreports/bugreport
+    disabled
+    oneshot
+    keycodes 42 139
+
+# Modemlog
+service modemlog /system/bin/modemlog
+    class TOOL
+    user system
+    oneshot
+
+# MMClog
+service mmclog /system/bin/mmclog
+    class TOOL
+    oneshot
 
     chown system system /sys/class/timed_output/vibrator/enable
     chown system system /sys/module/sco/parameters/disable_esco
@@ -152,6 +198,26 @@ on boot
     chown system system /sys/kernel/ipv4/tcp_rmem_def
     chown system system /sys/kernel/ipv4/tcp_rmem_max
 
+# Touchpad driver
+service touchpad /system/bin/touchpad -a /data/touchpad.log
+    class HW
+    user system
+    oneshot
+
+#FMRadio Service
+service fmradio /system/bin/fmradioserver
+ class BT
+
+#service dhcpcd /system/bin/dhcpcd -ABKL
+#    disabled
+#    oneshot
+
+service dhcpcd /system/bin/dhcpcd -B eth0
+    class WLAN
+#	user system - this makes socket() calls fail with permission denied
+	group dhcp
+    disabled
+    oneshot
 
     # cpufreq configurations
 #    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 245760
@@ -164,70 +230,100 @@ on boot
 # enable insecure AGPS
     setprop ro.ril.def.agps.mode 2
 
+service wpa_supplicant /system/bin/wpa_supplicant -D wext -i eth0 -c /data/misc/wifi/wpa_supplicant.conf
+    class WLAN
+#	user system - this makes socket() calls fail with permission denied
+	group wifi
+    disabled
+    oneshot
+    
+# E-compass  daemon
+service akmd2 /system/bin/akmd2 -f /system/etc/akm/akmd_set.cfg
+	user system
+	group input
+    class HW
+    oneshot
+
 # compass/accelerometer daemon
-service akmd /system/bin/akmd
-    user compass
-    group compass misc input
+#service akmd /system/bin/akmd
+#    user compass
+#    group compass misc input
+
 
 ## TCMD
-#service tcmd /system/bin/tcmd_engine usb0
+service tcmd /system/bin/tcmd_engine usb0
 #    user system - this makes reboot failing
 #    group system inet
-#    socket local_tcmd stream 0660 system system
+    class TCMD
 
 service port_bridge /system/bin/port_bridge /dev/smd0 /dev/ttyHSUSB0
-        user radio
-        group system
+	user radio
+	group system
+    class TCMD
 
 service fuel_gauge /system/bin/fuel_gauge --all
-    oneshot
-
+    class TCMD
+    oneshot    
+    
 service qmuxd /system/bin/qmuxd
-    oneshot
-
-service wpa_supplicant /system/bin/wpa_supplicant \
-    -Dwext -ieth0 -c/data/misc/wifi/wpa_supplicant.conf
-#   we will start as root and wpa_supplicant will switch to user wifi
-#   after setting up the capabilities required for WEXT
-#   user wifi
-#   group wifi inet keystore
-    socket wpa_eth0 dgram 660 wifi wifi
-    disabled
-    oneshot
-
-service dhcpcd /system/bin/dhcpcd -ABKL
-    disabled
-    oneshot
-
-#bluetooth 
-service hciattach /system/bin/brcm_patchram_plus --enable_hci --enable_lpm \
-    --baudrate 4000000 --patchram /etc/firmware/bcm4325.hcd /dev/ttyHS0
-    user bluetooth
-    group bluetooth net_bt_admin
-    disabled
-    oneshot
-
-#FMRadio Service
-#service fmradio /system/bin/fmradioserver
-# class BT
-
-# touchpad service
-service touchpad /system/bin/touchpad \
-    -a /data/touchpad.log
-    oneshot
-
-# bugreport is triggered by the KEY_LEFTSHIFT and KEY_MENU keycodes
-service bugreport /system/bin/dumpstate -d -v -o /sdcard/bugreports/bugreport
-    disabled
-    oneshot
-    keycodes 42 139
-
-# Modemlog
-service modemlog /system/bin/modemlog
-    user system
-    oneshot
+    class HW
 
 service minipadut /system/bin/minipadut -a
    user system
    group input misc
    oneshot
+
+on property:sys.motorola.suspended=1
+    class_stop zygote_services
+
+on property:sys.motorola.suspended=0
+    class_start zygote_services
+
+#on property:sys.motorola.infactory=1
+#    class_start ADB
+#    class_start TCMD
+#    class_start TOOL
+#    class_start ANDROID
+#    class_start MEDIA
+#    class_start BT
+#    class_start WLAN
+#    class_start HW
+    
+on property:sys.motorola.infactory=2
+    class_start ADB
+    class_start TCMD
+    class_start TOOL
+    class_start RIL
+    class_start pre-zygote_services
+    class_start zygote_services
+    class_start post-zygote_services
+    class_start ANDROID
+    class_start MEDIA
+    class_start BT
+    class_start WLAN
+    class_start HW
+    
+
+on property:sys.motorola.infactory=0
+    class_start ADB
+    class_start TOOL
+    class_start RIL
+    class_start pre-zygote_services
+    class_start zygote_services
+    class_start post-zygote_services
+    class_start ANDROID
+    class_start MEDIA
+    class_start BT
+    class_start WLAN
+    class_start HW
+    class_start TCMD
+
+on property:persist.factorytest=1
+    stop zygote
+
+on property:persist.factorytest=2
+    stop zygote
+
+on property:persist.factorytest=0
+    start zygote
+
